@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import google.generativeai as genai
 from PIL import Image
 import os
@@ -50,9 +51,17 @@ if st.session_state.user_email:
         st.session_state.analysis_result = None
         st.rerun()
 
-st.sidebar.divider()
-st.sidebar.info("📢 **Reklam Alanı**")
-st.sidebar.image("https://via.placeholder.com/300x250.png?text=Reklam+Buraya", use_container_width=True)
+# --- SIDEBAR REKLAM/SPONSOR ALANI ---
+promo_sidebar = """
+<div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center; color: white; font-family: sans-serif;">
+    <h3 style="margin-top:0; color: #ff4b4b;">🚀 Sponsor Olun</h3>
+    <p style="font-size: 0.9em; color: #aaa;">Uygulamamıza reklam vererek binlerce kullanıcıya ulaşın.</p>
+    <a href="mailto:reklam@appplaka.com" style="display: inline-block; padding: 10px 20px; background-color: #ff4b4b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px;">İletişime Geçin</a>
+</div>
+"""
+with st.sidebar:
+    st.divider()
+    components.html(promo_sidebar, height=250)
 
 # Başlıklar
 st.title("🛡️ APP Plaka Dedektörü")
@@ -222,3 +231,12 @@ Gördüğün harf fontunu ve sac kalitesini açıkla.
                 # Her durumda sayfayı yenile ki state değişiklikleri (sonuç veya hata) görünsün
                 st.rerun()
 
+    # --- ALT REKLAM ALANI (Responsive Yatay) ---
+    st.divider()
+    promo_footer = """
+    <div style="background: linear-gradient(90deg, #1e1e1e 0%, #333 100%); padding: 15px; border-radius: 10px; text-align: center; color: white; font-family: sans-serif;">
+        <span style="font-weight: bold;">📢 Duyuru:</span> Yeni araç modelleri ve daha hızlı analiz altyapısı yakında sizlerle! 🚗💨 
+        <br><small style="color:#aaa;">Reklam ve İş Birliği: <b>ytdker@github</b></small>
+    </div>
+    """
+    components.html(promo_footer, height=100)
