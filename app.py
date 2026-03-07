@@ -25,7 +25,15 @@ API_KEYS_LIST = [key.strip() for key in API_KEYS_STRING.split(",")] if API_KEYS_
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD", "")
 
-st.set_page_config(page_title="APP Plaka Dedektörü", page_icon="🚗", layout="centered")
+st.set_page_config(page_title="🛡️ APP Plaka Dedektörü", page_icon="🚗", layout="centered")
+
+# --- GOOGLE ADSENSE ONAY KODU (BURAYA PUB- KEY YAPIŞTIRILACAK) ---
+# Lütfen ca-pub-XXXXXXXXXXXX kısmını kendi AdSense ID'nizle değiştirin.
+adsense_verification = """
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3526282702329383"
+     crossorigin="anonymous"></script>
+"""
+components.html(adsense_verification, height=0)
 
 # --- SESSION STATE BAŞLATMA ---
 if "init" not in st.session_state:
@@ -53,17 +61,25 @@ if st.session_state.user_email:
         st.session_state.analysis_result = None
         st.rerun()
 
-# --- SIDEBAR REKLAM/SPONSOR ALANI ---
-promo_sidebar = """
-<div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center; color: white; font-family: sans-serif;">
-    <h3 style="margin-top:0; color: #ff4b4b;">🚀 Sponsor Olun</h3>
-    <p style="font-size: 0.9em; color: #aaa;">Uygulamamıza reklam vererek binlerce kullanıcıya ulaşın.</p>
-    <a href="mailto:reklam@appplaka.com" style="display: inline-block; padding: 10px 20px; background-color: #ff4b4b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px;">İletişime Geçin</a>
+# --- SIDEBAR GERÇEK REKLAM ALANI ---
+# data-ad-slot kısmını AdSense panelinden aldığınız numara ile değiştirin.
+adsense_sidebar = """
+<div style="text-align:center;">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3526282702329383"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:250px"
+         data-ad-client="ca-pub-3526282702329383"
+         data-ad-slot="1111111111"></ins>
+    <script>
+         target_node = document.currentScript.previousElementSibling;
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 """
 with st.sidebar:
     st.divider()
-    components.html(promo_sidebar, height=250)
+    components.html(adsense_sidebar, height=260)
 
 # Sayfa İçerikleri
 if page == "📖 Hakkımızda":
@@ -85,6 +101,8 @@ elif page == "⚖️ Gizlilik Politikası":
     1. **Fotoğraflar:** Yüklediğiniz plaka fotoğrafları sadece analiz anında kullanılır ve sunucularımızda kalıcı olarak saklanmaz.
     2. **E-postalar:** E-posta adresiniz sadece OTP doğrulama ve analiz kotanızın takibi için kullanılır. 
     3. **Üçüncü Taraflar:** Verileriniz reklam sağlayıcıları (Google AdSense) dışında hiçbir kurumla paylaşılmaz.
+    
+    *İletişim ve veri talepleri için: **appplakadetektoru@gmail.com***
     
     *Bu uygulama bir tahmin aracıdır. Sonuçlar resmi bağlayıcılık taşımaz.*
     """)
@@ -260,15 +278,25 @@ Gördüğün harf fontunu ve sac kalitesini açıkla.
                     # Her durumda sayfayı yenile ki state değişiklikleri (sonuç veya hata) görünsün
                     st.rerun()
 
-    # --- ALT REKLAM ALANI (Responsive Yatay) ---
+    # --- ALT GERÇEK REKLAM ALANI (Yatay/Responsive) ---
     st.divider()
-    promo_footer = """
-    <div style="background: linear-gradient(90deg, #1e1e1e 0%, #333 100%); padding: 15px; border-radius: 10px; text-align: center; color: white; font-family: sans-serif;">
-        <span style="font-weight: bold;">📢 Duyuru:</span> Yeni araç modelleri ve daha hızlı analiz altyapısı yakında sizlerle! 🚗💨 
-        <br>
-        <div style="margin-top:10px; font-size: 0.8em; color:#aaa;">
-            © 2026 APP Plaka Dedektörü | <a href="#" style="color:#aaa;">Gizlilik</a> | <a href="#" style="color:#aaa;">KVKK</a> | İletişim: ytdker@github
+    adsense_footer = """
+    <div style="text-align:center;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3526282702329383"
+         crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3526282702329383"
+             data-ad-slot="2222222222"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <div style="margin-top:20px; font-size: 0.8em; color:#aaa; font-family: sans-serif;">
+            © 2026 APP Plaka Dedektörü | <a href="#" style="color:#aaa; text-decoration:none;">Gizlilik</a> | <a href="#" style="color:#aaa; text-decoration:none;">KVKK</a> 
+            <br>💎 İletişim: <b>appplakadetektoru@gmail.com</b>
         </div>
     </div>
     """
-    components.html(promo_footer, height=120)
+    components.html(adsense_footer, height=220)
