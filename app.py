@@ -37,6 +37,10 @@ hide_st_style = """
             .viewerBadge_container__1QSob {display: none;}
             .stDeployButton {display: none;}
             #stDecoration {display: none;}
+            /* Profil resmi ve alt barı tamamen gizle */
+            div[data-testid="stStatusWidget"] {display: none;}
+            .stViewerBadge {display: none !important;}
+            iframe[title="managed_navigation_iframe"] {display: none !important;}
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
