@@ -40,3 +40,5 @@ kayitli_kullanicilar.txt
 # OS
 .DS_Store
 Thumbs.db
+# Admin Logları
+sorgu_loglari.txt
