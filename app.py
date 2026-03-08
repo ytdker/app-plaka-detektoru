@@ -136,13 +136,22 @@ elif page == "🚗 Plaka Analizi":
                 if st.button("🚀 Doğrulama Kodu Gönder"):
                     if re.match(r"[^@]+@[^@]+\.[^@]+", e_input):
                         try:
+                            # Çevresel değişken (Secrets) kontrolü
+                            if not SENDER_EMAIL or not SENDER_PASSWORD:
+                                st.error("🔑 **Sistem Hatası:** E-posta veya şifre (Secrets) tanımlanmamış!")
+                                st.info("Streamlit Dashboard -> Settings -> Secrets alanından SENDER_EMAIL ve SENDER_PASSWORD bilgilerini girdiğinizden emin olun.")
+                                st.stop()
+
                             code = str(random.randint(100000, 999999))
                             msg = MIMEText(f"APP Plaka giriş kodunuz: {code}")
                             msg['Subject'] = 'Giriş Kodu'; msg['From'] = SENDER_EMAIL; msg['To'] = e_input
                             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as srv:
                                 srv.login(SENDER_EMAIL, SENDER_PASSWORD); srv.send_message(msg)
                             st.session_state.otp_code = code; st.session_state.otp_email = e_input; st.session_state.otp_sent = True; st.rerun()
-                        except Exception as e: st.error(f"Mail gönderilemedi: {e}")
+                        except Exception as e: 
+                            st.error(f"Mail gönderilemedi: {e}")
+                            if "535" in str(e):
+                                st.warning("💡 **Çözüm:** Google hesabınızdan 'Uygulama Şifresi' (App Password) oluşturmanız ve bunu Secrets'a eklemeniz gerekmektedir. Gmail normal şifrenizi güvenlik nedeniyle kabul etmiyor.")
                     else: st.error("Geçerli e-posta girin.")
             else:
                 v_input = st.text_input("6 Haneli Kod:", key="otp_field")
