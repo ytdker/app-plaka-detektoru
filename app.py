@@ -34,13 +34,19 @@ hide_st_style = """
             footer {visibility: hidden;}
             header {visibility: hidden;}
             [data-testid="stHeader"] {display: none;}
-            .viewerBadge_container__1QSob {display: none;}
             .stDeployButton {display: none;}
             #stDecoration {display: none;}
-            /* Profil resmi ve alt barı tamamen gizle */
-            div[data-testid="stStatusWidget"] {display: none;}
+            
+            /* Agresif Gizleme: Tüm Rozet ve Profil Barı Elemanları */
+            [data-testid="stStatusWidget"] {display: none !important;}
             .stViewerBadge {display: none !important;}
+            div[class^="viewerBadge"] {display: none !important;}
+            div[class*="viewerBadge"] {display: none !important;}
+            div[data-testid="stConnectionStatus"] {display: none !important;}
             iframe[title="managed_navigation_iframe"] {display: none !important;}
+            
+            /* Sayfanın en altındaki zorunlu Streamlit alanlarını sıfırla */
+            .stApp > div:first-child {display: none !important;}
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
