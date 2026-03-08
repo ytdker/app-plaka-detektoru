@@ -27,9 +27,9 @@ SENDER_PASSWORD = os.getenv("SENDER_PASSWORD", "")
 
 st.set_page_config(page_title="🛡️ APP Plaka Dedektörü", page_icon="🚗", layout="centered")
 
-# --- GOOGLE ADSENSE ONAY KODU (BURAYA PUB- KEY YAPIŞTIRILACAK) ---
-# Lütfen ca-pub-XXXXXXXXXXXX kısmını kendi AdSense ID'nizle değiştirin.
+# --- GOOGLE ADSENSE ONAY KODU & META ETİKETİ ---
 adsense_verification = """
+<meta name="google-adsense-account" content="ca-pub-3526282702329383">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3526282702329383"
      crossorigin="anonymous"></script>
 """
