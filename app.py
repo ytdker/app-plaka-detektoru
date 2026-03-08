@@ -37,16 +37,11 @@ hide_st_style = """
             .stDeployButton {display: none;}
             #stDecoration {display: none;}
             
-            /* Agresif Gizleme: Tüm Rozet ve Profil Barı Elemanları */
+            /* Sadece Rozet ve Profil Barını Hedefle (Güvenli) */
             [data-testid="stStatusWidget"] {display: none !important;}
             .stViewerBadge {display: none !important;}
-            div[class^="viewerBadge"] {display: none !important;}
             div[class*="viewerBadge"] {display: none !important;}
-            div[data-testid="stConnectionStatus"] {display: none !important;}
             iframe[title="managed_navigation_iframe"] {display: none !important;}
-            
-            /* Sayfanın en altındaki zorunlu Streamlit alanlarını sıfırla */
-            .stApp > div:first-child {display: none !important;}
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
