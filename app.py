@@ -27,6 +27,20 @@ SENDER_PASSWORD = os.getenv("SENDER_PASSWORD", "")
 
 st.set_page_config(page_title="🛡️ APP Plaka Dedektörü", page_icon="🚗", layout="centered")
 
+# --- ARAYÜZ TEMİZLİĞİ (STREAMLIT LOGOLARINI GİZLE) ---
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            [data-testid="stHeader"] {display: none;}
+            .viewerBadge_container__1QSob {display: none;}
+            .stDeployButton {display: none;}
+            #stDecoration {display: none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # --- SESSION STATE BAŞLATMA ---
 
 # --- SESSION STATE BAŞLATMA ---
